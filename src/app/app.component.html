@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card m-3 bg-info">
+            <h5 class="card-header">Angular Template-Driven Form Validation</h5>
+            <div class="card-body">
+                <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && submit()" novalidate>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Title</label>
+                            <select name="title" [(ngModel)]="formdata.title" class="form-control" #title="ngModel" [ngClass]="{'is-invalid':f.submitted && title.invalid ,'is-valid':f.submitted && title.valid }" required>
+                                <option value=""></option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Ms">Ms</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                <div>Title is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-5">
+                            <label>First Name</label>
+                            <input
+                                type="text"
+                                name="firstName"
+                                [(ngModel)]="formdata.first_name"
+                                class="form-control"
+                                required
+                                #name="ngModel"
+                                [ngClass]="{'is-invalid':f.submitted && name.invalid  }"
+                            />
+                            <div class="invalid-feedback">
+                                <div>First Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-5">
+                            <label>Last Name</label>
+                            <input
+                                type="text"
+                                name="lastName"
+                                [(ngModel)]="formdata.last_name"
+                                class="form-control"
+                                required
+                                #last_name="ngModel"
+                                [ngClass]="{'is-invalid':f.submitted && last_name.invalid  }"
+                            />
+                            <div class="invalid-feedback">
+                                <div>Last Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Date of Birth</label>
+                            <input
+                                type="date"
+                                name="dob"
+                                [(ngModel)]="formdata.dob"
+                                class="form-control"
+                                required
+                                pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
+                                #dob="ngModel"
+                                [ngClass]="{'is-invalid':f.submitted && dob.invalid  }"
+                            />
+                            <div class="invalid-feedback">
+                                <div *ngIf="dob.errors?.required">Date of Birth is required</div>
+                                <div *ngIf="dob.errors?.pattern">
+                                    Date of Birth must be a valid date in the
+                                    format YYYY-MM-DD
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Email</label>
+                            <input
+                                type="text"
+                                name="email"
+                                [(ngModel)]="formdata.email"
+                                class="form-control"
+                                email
+                                required
+                                #email="ngModel"
+                                [ngClass]="{'is-invalid':f.submitted && email.invalid  }"
+                            />
+                            <div class="invalid-feedback">
+                                <div *ngIf="email.errors?.required">Email is required</div>
+                                <div *ngIf="dob.errors?.email">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                [(ngModel)]="formdata.password"
+                                class="form-control"
+                                required
+                                minlength="6"
+                                #password="ngModel"
+                                [ngClass]="{'is-invalid':f.submitted && password.invalid  }"
+                            />
+                            <div class="invalid-feedback">
+                                <div *ngIf="password.errors?.required">Password is required</div>
+                                <div *ngIf="password.errors?.minlength">
+                                    Password must be at least 6 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                [(ngModel)]="formdata.confirm_password"
+                                class="form-control"
+                                required
+                                #c_password="ngModel"
+                                [ngClass]="{'is-invalid':f.submitted && c_password.invalid  }"
+                            />
+                            <div class="invalid-feedback">
+                                <div>Confirm Password is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <input
+                            type="checkbox"
+                            name="acceptTerms"
+                            [(ngModel)]="formdata.accept_terms"
+                            id="acceptTerms"
+                            class="form-check-input"
+                            required
+                            #agree_terms="ngModel"
+                            [ngClass]="{'is-invalid':f.submitted && agree_terms.invalid  }"
+                        />
+                        <label for="acceptTerms" class="form-check-label"
+                            >Accept Terms & Conditions</label
+                        >
+                        <div class="invalid-feedback">
+                            Accept Ts & Cs is required
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary me-2">
+                            Register
+                        </button>
+                        <button class="btn btn-danger" type="reset">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
